@@ -7,7 +7,7 @@ export default function LoginForm() {
   const [mode, setMode] = useState("signup");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const { signUp, user, logout, login } = useContext(AuthContext);
+  const { signUp, login } = useContext(AuthContext);
 
   const {
     register,
@@ -41,12 +41,6 @@ export default function LoginForm() {
           <h1 className="text-2xl font-bold text-gray-800">
             {mode === "signup" ? "Create Account" : "Welcome Back"}
           </h1>
-
-          {user && (
-            <div className="mt-3 bg-green-50 text-green-700 text-sm px-3 py-2 rounded-lg">
-              Logged in as: <span className="font-medium">{user.email}</span>
-            </div>
-          )}
         </div>
 
         {/* Form */}
@@ -128,34 +122,26 @@ export default function LoginForm() {
           {mode === "signup" ? (
             <p>
               Already have an account?{" "}
-              <span
+              <button
                 onClick={() => setMode("login")}
                 className="text-indigo-600 cursor-pointer hover:underline font-medium"
               >
                 Login
-              </span>
+              </button>
             </p>
           ) : (
             <p>
               Don’t have an account?{" "}
-              <span
+              <button
                 onClick={() => setMode("signup")}
                 className="text-indigo-600 cursor-pointer hover:underline font-medium"
               >
                 Sign Up
-              </span>
+              </button>
             </p>
           )}
 
-          {/* Logout Button */}
-          {user && (
-            <button
-              onClick={logout}
-              className="w-full border border-gray-300 text-gray-600 py-2 rounded-lg hover:bg-gray-100 transition duration-200"
-            >
-              Logout
-            </button>
-          )}
+         
         </div>
       </div>
     </div>
