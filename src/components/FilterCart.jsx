@@ -1,6 +1,7 @@
 import { Search } from "lucide-react";
+import { useState } from "react";
 
-export default function FilterCart() {
+export default function FilterCart({search, setSearch}) {
   return (
     <div className="w-full flex justify-center px-4 md:px-0">
       <div className="relative w-full max-w-md">
@@ -15,6 +16,8 @@ export default function FilterCart() {
         <input
           type="text"
           placeholder="Search products..."
+          value={search}
+          onChange={(e)=> setSearch(e.target.value)}
           className="
             w-full
             pl-10 pr-4 py-3

@@ -1,10 +1,13 @@
 import { getProducts } from "../data/products";
 import ProductCard from "../components/ProductCard";
 import FilterCart from "../components/FilterCart";
+import { useState } from "react";
 
 export default function Home() {
+  const [search, setSearch] = useState("")
   const products = getProducts();
 
+  const filterCards = products.filter((product)=> product.title.toLowerCase().includes(search.toLowerCase()))
   return (
     <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
 
@@ -19,7 +22,7 @@ export default function Home() {
       </div>
 
       {/* Search / Filter */}
-      <FilterCart />
+      <FilterCart search={search} setSearch={setSearch}/>
 
       {/* Products Section */}
       <div className="max-w-7xl mx-auto px-4 pb-16">
@@ -27,7 +30,7 @@ export default function Home() {
           Our Products
         </h2>
         <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {products.map((product) => (
+          {filterCards.map((product) => (
             <ProductCard product={product} key={product.id} />
           ))}
         </div>

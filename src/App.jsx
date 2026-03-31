@@ -8,6 +8,7 @@ import Navbar from './components/Navbar/Navbar';
 import AuthProvider from './context/Auth';
 import ProductDetails from './Pages/productDetails';
 import CartProvider from './context/Cart';
+import Footer from './components/Footer';
 function App() {
   return (
     <AuthProvider>
@@ -20,7 +21,7 @@ function App() {
             <Route path='/cart' element={<Checkout />} />
             <Route path='/product/:id' element={<ProductDetails />} />
           </Routes>
-
+          <Footer/>
       </CartProvider>
     </AuthProvider>
 
