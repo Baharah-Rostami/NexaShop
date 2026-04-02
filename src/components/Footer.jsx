@@ -37,7 +37,7 @@ export default function Footer() {
         <div>
           <h3 className="font-semibold mb-2">Contact</h3>
           <p>Email: baharrustami888@gmail.com</p>
-          <p>Phone: +93 7950 64219</p>
+          <p>Phone: +93 7786 8710</p>
 
           <div className="flex mt-4 space-x-3">
             <Link to="#" className="hover:text-blue-500 transition-colors">🌐</Link>
