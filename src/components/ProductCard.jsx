@@ -15,7 +15,6 @@ export default function ProductCard({ product }) {
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md hover:shadow-xl dark:shadow-gray-900/40 transition duration-300 overflow-hidden">
-
       {/* Image + Heart */}
       <div className="relative h-48 overflow-hidden">
         <img
