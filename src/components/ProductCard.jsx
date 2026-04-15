@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom";
-import { userCart } from "../context/Cart";
+import { addToCart } from "../Store/CartSlice";
 import { ShoppingCart } from "lucide-react";
 import { useFavorite } from "../context/Favorite";
+import { useDispatch, useSelector } from "react-redux";
 
 
 export default function ProductCard({ product }) {
-  const { addToCart, cartItem } = userCart();
   const { toggleFavorite, isFavorite } = useFavorite()
+  const disPatch = useDispatch();
+  const cartItems = useSelector(state => state.cart.items);
 
-  const productCard = cartItem.find((item) => item.id === product.id);
+  const productCard = cartItems.find((item) => item.id === product.id);
   const productQuantityLabel = productCard ? `(${productCard.quantity})` : "";
 
   return (
@@ -64,7 +66,7 @@ export default function ProductCard({ product }) {
 
           {/* Add to Cart */}
           <button
-            onClick={() => addToCart(product.id)}
+            onClick={() => disPatch(addToCart(product.id))}
             className="flex items-center gap-1 bg-fuchsia-600 text-white text-sm px-3 py-1.5 rounded-lg hover:bg-fuchsia-700 transition">
 
             <ShoppingCart className="w-4 h-4" />

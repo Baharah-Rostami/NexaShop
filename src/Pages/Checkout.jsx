@@ -1,10 +1,18 @@
-import { userCart } from "../context/Cart";
+import { useDispatch, useSelector } from "react-redux";
+import { increaseQty, decreaseQty, removeItem } from "../Store/CartSlice";
+import { getProducts } from "../data/products";
 
 export default function Checkout() {
-  const { getCartItemWithProducts, increaseQuantity, decreaseQuantity, removeItem } = userCart();
-  const cartItems = getCartItemWithProducts();
+  const dispatch = useDispatch();
+  const cartItems = useSelector(state => state.cart.items);
+  
+  const products = getProducts();
+  const cartItemsProducts = cartItems.map(item => {
+    const product = products.find(p => p.id === item.id);
+    return { ...item, product };
+  });
 
-  const total = cartItems.reduce(
+  const total = cartItemsProducts.reduce(
     (sum, item) => sum + item.product.price * item.quantity,
     0
   );
@@ -20,7 +28,7 @@ export default function Checkout() {
           </h1>
 
           <div className="space-y-4">
-            {cartItems.map((item) => (
+            {cartItemsProducts.map((item) => (
               <div
                 key={item.id}
                 className="flex flex-col md:flex-row md:items-center gap-4 border-b border-gray-200 dark:border-gray-700 pb-4"
@@ -47,7 +55,7 @@ export default function Checkout() {
                   {/* Quantity */}
                   <div className="flex items-center border rounded-lg overflow-hidden border-gray-300 dark:border-gray-600">
                     <button
-                      onClick={() => decreaseQuantity(item.id)}
+                      onClick={() => dispatch(decreaseQty(item.id))}
                       className="px-3 py-1 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 dark:text-white transition"
                     >
                       -
@@ -56,7 +64,7 @@ export default function Checkout() {
                     <span className="px-4 text-gray-800 dark:text-gray-100">{item.quantity}</span>
 
                     <button
-                      onClick={() => increaseQuantity(item.id)}
+                      onClick={() => dispatch(increaseQty(item.id))}
                       className="px-3 py-1 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 dark:text-white transition"
                     >
                       +
@@ -70,7 +78,7 @@ export default function Checkout() {
 
                   {/* Remove */}
                   <button
-                    onClick={() => removeItem(item.id)}
+                    onClick={() => dispatch(removeItem(item.id))}
                     className="text-sm text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-500 transition"
                   >
                     Remove
