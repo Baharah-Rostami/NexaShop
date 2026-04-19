@@ -15,7 +15,6 @@ function App() {
   return (
     <AuthProvider>
       <FavoriteProvider>
-        <CartProvider>
           <Navbar />
           <Routes>
             <Route path='/' element={<Home />} />
@@ -25,7 +24,6 @@ function App() {
             <Route path="/favorites" element={<Favorites />} />
           </Routes>
           <Footer />
-        </CartProvider>
       </FavoriteProvider>
 
     </AuthProvider>
