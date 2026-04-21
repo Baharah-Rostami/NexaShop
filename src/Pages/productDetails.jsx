@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getProductsID } from "../data/products";
-import { userCart } from "../context/Cart";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../Store/CartSlice";
 
 function ProductDetails() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const navigate = useNavigate();
-  const { addToCart, cartItem } = userCart();
+
+  const dispatch = useDispatch();
+  const cartItems = useSelector(state => state.cart.items);
 
   useEffect(() => {
     const foundProduct = getProductsID(Number(id));
@@ -25,8 +28,7 @@ function ProductDetails() {
       </div>
     );
   }
-
-  const productCard = cartItem.find((item) => item.id === product.id);
+  const productCard = cartItems.find((item) => item.id === product.id);
   const productQuantityLabel = productCard ? `(${productCard.quantity})` : "";
 
   return (
@@ -67,7 +69,7 @@ function ProductDetails() {
             <div className="flex gap-4 pt-4 flex-col sm:flex-row">
               <button
                 className="flex-1 bg-fuchsia-600 text-white py-2 rounded-lg hover:bg-fuchsia-500 dark:bg-fuchsia-500 dark:hover:bg-fuchsia-400 transition shadow-md"
-                onClick={() => addToCart(product.id)}
+                onClick={() => dispatch(addToCart(product.id))}
               >
                 Add to Cart {productQuantityLabel}
               </button>

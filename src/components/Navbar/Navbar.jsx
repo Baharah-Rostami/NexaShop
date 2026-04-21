@@ -4,20 +4,13 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/Auth";
 import ThemeToggle from "./ThemeToggle";
 import MobileMenu from "./MobileMenu";
+import { useTheme } from "../../context/ThemeContext";
+
 export default function Navbar() {
   const { user, logout } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
-  const [theme, setTheme] = useState("light");
-
-  useEffect(() => {
-    const root = document.documentElement;
-
-    if (theme === "dark") {
-      root.setAttribute("data-theme", "dark");
-    } else {
-      root.removeAttribute("data-theme");
-    }
-  }, [theme]);
+  const { theme, toggleTheme } = useTheme();
+  
   return (
     <nav className="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 shadow-sm border-b border-gray-200 dark:border-gray-700">
       <div className="max-w-7xl mx-auto px-4">
@@ -59,7 +52,7 @@ export default function Navbar() {
 
           {/* Right Side */}
           <div className="flex items-center gap-3 bg-gray-100 dark:bg-gray-700 p-1 rounded-lg">
-            <ThemeToggle theme={theme} setTheme={setTheme} />
+            <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
           </div>
           {!user ? (
             <div className="hidden md:flex items-center gap-3">

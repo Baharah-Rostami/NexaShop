@@ -6,15 +6,16 @@ import Checkout from './Pages/Checkout';
 import Navbar from './components/Navbar/Navbar';
 import AuthProvider from './context/Auth';
 import ProductDetails from './Pages/productDetails';
-import CartProvider from './context/Cart';
 import Footer from './components/Footer';
 import { FavoriteProvider } from './context/Favorite';
 import Favorites from './Pages/Favorite';
+import { ThemeProvider } from './context/ThemeContext';
 
 function App() {
   return (
     <AuthProvider>
-      <FavoriteProvider>
+     <ThemeProvider>
+           <FavoriteProvider>
           <Navbar />
           <Routes>
             <Route path='/' element={<Home />} />
@@ -25,7 +26,8 @@ function App() {
           </Routes>
           <Footer />
       </FavoriteProvider>
-
+     </ThemeProvider>
+   
     </AuthProvider>
 
   )
