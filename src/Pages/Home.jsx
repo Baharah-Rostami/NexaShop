@@ -1,15 +1,29 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../data/products";
 import ProductCard from "../components/ProductCard";
 import FilterCart from "../components/FilterCart";
-import { useState } from "react";
 import { useFavorite } from "../context/Favorite";
-import { Link } from "react-router-dom";
 import FeatureCards from "../components/FeatureCards";
-
 export default function Home() {
-  const [search, setSearch] = useState("")
-  const products = getProducts();
-  const { favorites } = useFavorite();
+  const [search, setSearch] = useState("");
+
+const { data: products = [], isLoading, error } = useQuery({
+  queryKey: ["products"],
+  queryFn: getProducts,
+});
+
+const { favorites } = useFavorite(); // 👈 اینجا
+
+if (isLoading) {
+  return <div>Loading...</div>;
+}
+
+if (error) {
+  return <div>Error loading products</div>;
+}
+
 
   const filterCards = products.filter((product) => product.title.toLowerCase().includes(search.toLowerCase()))
   return (

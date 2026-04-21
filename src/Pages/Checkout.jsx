@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useQuery } from "@tanstack/react-query";
 import { increaseQty, decreaseQty, removeItem } from "../Store/CartSlice";
 import { getProducts } from "../data/products";
 
@@ -6,7 +7,10 @@ export default function Checkout() {
   const dispatch = useDispatch();
   const cartItems = useSelector(state => state.cart.items);
   
-  const products = getProducts();
+  const { data: products = [] } = useQuery({
+  queryKey: ["products"],
+  queryFn: getProducts,
+});
   const cartItemsProducts = cartItems.map(item => {
     const product = products.find(p => p.id === item.id);
     return { ...item, product };

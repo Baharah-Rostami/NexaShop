@@ -1,33 +1,29 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getProductsID } from "../data/products";
 import { useDispatch, useSelector } from "react-redux";
+import { useQuery } from "@tanstack/react-query";
+import { getProductsID } from "../data/products";
 import { addToCart } from "../Store/CartSlice";
 
 function ProductDetails() {
   const { id } = useParams();
-  const [product, setProduct] = useState(null);
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const cartItems = useSelector(state => state.cart.items);
 
-  useEffect(() => {
-    const foundProduct = getProductsID(Number(id));
-    if (!foundProduct) {
-      navigate("/");
-      return;
-    }
-    setProduct(foundProduct);
-  }, [id]);
-
-  if (!product) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-gray-600 dark:text-gray-300">
-        Loading...
-      </div>
-    );
+  const { data: product, isLoading, error } = useQuery({
+    queryKey: ["product", id],
+    queryFn: () => getProductsID(id),
+  });
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
+
+  if (error || !product) {
+    return <div>Product not found</div>;
+  }
+
   const productCard = cartItems.find((item) => item.id === product.id);
   const productQuantityLabel = productCard ? `(${productCard.quantity})` : "";
 

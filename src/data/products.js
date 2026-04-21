@@ -91,9 +91,13 @@ const products = [
   },
 ];
 
-export function getProducts(){
-    return products;
-};
+export async function getProducts() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(products);
+    }, 500);
+  });
+}
 export function getProductsID(id){
     return products.find((p) => p.id === Number(id))
 };
