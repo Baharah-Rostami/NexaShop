@@ -6,23 +6,29 @@ import ProductCard from "../components/ProductCard";
 import FilterCart from "../components/FilterCart";
 import { useFavorite } from "../context/Favorite";
 import FeatureCards from "../components/FeatureCards";
+import ProductCardSkeleton from "../components/Skeleton/ProductCardSkeleton";
+
 export default function Home() {
   const [search, setSearch] = useState("");
 
-const { data: products = [], isLoading, error } = useQuery({
-  queryKey: ["products"],
-  queryFn: getProducts,
-});
+  const { data: products = [], isLoading, error } = useQuery({
+    queryKey: ["products"],
+    queryFn: getProducts,
+  });
 
-const { favorites } = useFavorite(); // 👈 اینجا
+  const { favorites } = useFavorite();
 
-if (isLoading) {
-  return <div>Loading...</div>;
-}
+  if (isLoading) {
+    return <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 p-6">
+      {Array.from({ length: 8 }).map((_, index) => (
+        <ProductCardSkeleton key={index} />
+      ))}
+    </div>;
+  }
 
-if (error) {
-  return <div>Error loading products</div>;
-}
+  if (error) {
+    return <div className="text-center py-10 text-red-500 dark:text-red-400 font-medium">Error loading products</div>;
+  }
 
 
   const filterCards = products.filter((product) => product.title.toLowerCase().includes(search.toLowerCase()))
@@ -56,7 +62,7 @@ if (error) {
           </div>
 
           {/* RIGHT SIDE - Feature Cards */}
-          <FeatureCards/>
+          <FeatureCards />
         </div>
         <div className=" border-b-2 border-fuchsia-300 mt-6"></div>
       </div>

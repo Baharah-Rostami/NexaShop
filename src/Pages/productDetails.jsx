@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 import { getProductsID } from "../data/products";
 import { addToCart } from "../Store/CartSlice";
+import ProductDetailsSkeleton from "../components/Skeleton/ProductDetailsSkeleton";
 
 function ProductDetails() {
   const { id } = useParams();
@@ -17,11 +17,13 @@ function ProductDetails() {
     queryFn: () => getProductsID(id),
   });
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <ProductDetailsSkeleton/>
   }
 
   if (error || !product) {
-    return <div>Product not found</div>;
+    return <div className="text-center text-red-500 py-10">
+      Product not found or failed to load
+    </div>
   }
 
   const productCard = cartItems.find((item) => item.id === product.id);
@@ -46,7 +48,7 @@ function ProductDetails() {
           <div className="space-y-4">
 
             <span className="inline-block text-xs bg-fuchsia-100 dark:bg-fuchsia-900 text-fuchsia-700 dark:text-fuchsia-300 px-3 py-1 rounded-full font-medium">
-              {product.category}
+              {product.category.toUpperCase()}
             </span>
 
             <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-100">
