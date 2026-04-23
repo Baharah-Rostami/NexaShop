@@ -70,8 +70,7 @@ http://localhost:5173
 
 ---
 
-## 📷 Screenshots / Demo
-
+## 📷 Screenshots 
 
 ```md
 <img width="960" height="540" alt="Screenshot 2026-04-23 110856" src="https://github.com/user-attachments/assets/6f74cf13-fbd5-4271-aac8-59b4792a38f0" />
