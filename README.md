@@ -88,6 +88,4 @@ https://github.com/your-username/nexashop
 
 ---
 
-
-
-Your Name
+Author : Baharah Rostami
