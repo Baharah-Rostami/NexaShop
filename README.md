@@ -83,8 +83,7 @@ http://localhost:5173
 
 ## 📂 GitHub Repository
 
-👉 Add your repository link here:
-https://github.com/your-username/nexashop
+https://github.com/Baharah-Rostami/NexaShop
 
 ---
 
