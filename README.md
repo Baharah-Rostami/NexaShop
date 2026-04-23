@@ -72,6 +72,7 @@ http://localhost:5173
 
 ## 📷 Screenshots 
 
+These screenshots show the main functionality of the app including browsing products, viewing details, and managing the cart.
 ```md
 <img width="960" height="540" alt="Image" src="https://github.com/user-attachments/assets/f3d32334-ec91-469e-9358-715e03129983" />
 <img width="960" height="540" alt="Image" src="https://github.com/user-attachments/assets/6aa76a2e-776a-4c54-a092-62c118242b14" />
