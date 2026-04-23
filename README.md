@@ -41,7 +41,7 @@ This project demonstrates the use of Context API, Redux Toolkit, and React Query
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/nexashop.git
+git clone https://github.com/Baharah-Rostami/nexashop.git
 ```
 
 2. Navigate to the project folder:
