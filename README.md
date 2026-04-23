@@ -74,7 +74,7 @@ http://localhost:5173
 
 ```md
 <img width="960" height="540" alt="Image" src="https://github.com/user-attachments/assets/f3d32334-ec91-469e-9358-715e03129983" />
-<img width="960" height="540" alt="Screenshot 2026-04-23 110824" src="https://github.com/user-attachments/assets/3db37fb4-6c11-4938-9326-d33080389e95" />
+<img width="960" height="540" alt="Image" src="https://github.com/user-attachments/assets/6aa76a2e-776a-4c54-a092-62c118242b14" />
 <img width="960" height="540" alt="Screenshot 2026-04-23 110730" src="https://github.com/user-attachments/assets/212460ef-9510-47fd-9b18-c35d6c95d34d" />
 ```
 
